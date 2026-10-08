@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BENVENUTO NELLA FAMIGLIA | Renaissance Mafia System</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Noto+Serif+Thai:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       VARIABLES & BASE STYLES
+       ========================================================================== */
+    :root {
+      --bg-dark: #0A0A0A;
+      --bg-card: #111111;
+      --bg-input: #1A1A1A;
+      --gold-primary: #D4AF37;
+      --gold-light: #F3E5AB;
+      --gold-dark: #B8860B;
+      --text-cream: #F5F1E8;
+      --text-muted: #A09A8E;
+      --border-gold: rgba(212, 175, 55, 0.4);
+      --glow-gold: 0 0 20px rgba(212, 175, 55, 0.25);
+      --font-heading: 'Cinzel', serif;
+      --font-body: 'Noto Serif Thai', serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-cream);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      background-image: 
+        radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 60%),
+        radial-gradient(circle at 50% 80%, rgba(0, 0, 0, 0.8) 0%, var(--bg-dark) 100%);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: repeating-linear-gradient(45deg, rgba(212, 175, 55, 0.015) 0px, rgba(212, 175, 55, 0.015) 2px, transparent 2px, transparent 10px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 650px;
+      z-index: 1;
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    /* ==========================================================================
+       HERO & HEADER SECTION
+       ========================================================================== */
+    .hero-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .crest-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 1.2rem auto;
+      display: block;
+      filter: drop-shadow(var(--glow-gold));
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      font-weight: 300;
+    }
+
+    .ornament-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1.2rem 0;
+    }
+
+    .ornament-divider::before,
+    .ornament-divider::after {
+      content: "";
+      height: 1px;
+      width: 80px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    }
+
+    .ornament-diamond {
+      width: 8px;
+      height: 8px;
+      background-color: var(--gold-primary);
+      transform: rotate(45deg);
+      margin: 0 12px;
+      box-shadow: 0 0 6px var(--gold-primary);
+    }
+
+    /* ==========================================================================
+       FORM CARD
+       ========================================================================== */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), var(--glow-gold);
+      padding: 2.5rem 2rem;
+      position: relative;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 4px; left: 4px; right: 4px; bottom: 4px;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      pointer-events: none;
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      color: var(--gold-light);
+      letter-spacing: 2px;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--text-cream);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .form-label .required {
+      color: var(--gold-primary);
+      margin-left: 3px;
+    }
+
+    .input-control {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background-color: var(--bg-input);
+      border: 1px solid var(--border-gold);
+      color: var(--text-cream);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .input-control:focus {
+      border-color: var(--gold-primary);
+      box-shadow: var(--glow-gold);
+    }
+
+    .input-control:disabled {
+      background-color: rgba(255, 255, 255, 0.03);
+      color: var(--text-muted);
+      border-color: rgba(212, 175, 55, 0.2);
+      cursor: not-allowed;
+      font-style: italic;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--gold-primary);
+      letter-spacing: 1.5px;
+      margin-top: 2rem;
+      margin-bottom: 0.3rem;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding-bottom: 0.4rem;
+    }
+
+    .section-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .error-message {
+      color: #e57373;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      text-align: center;
+      display: none;
+      border: 1px solid rgba(229, 115, 115, 0.3);
+      background: rgba(229, 115, 115, 0.08);
+      padding: 0.6rem;
+    }
+
+    /* ==========================================================================
+       BUTTONS
+       ========================================================================== */
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      background: linear-gradient(135deg, #B8860B 0%, #D4AF37 50%, #B8860B 100%);
+      color: #0A0A0A;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      border: 1px solid var(--gold-light);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      box-shadow: var(--glow-gold);
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(135deg, #D4AF37 0%, #F3E5AB 50%, #D4AF37 100%);
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+      transform: translateY(-1px);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    /* ==========================================================================
+       MODAL & RESULT
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--gold-primary);
+      padding: 3rem 2rem;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+      transform: scale(0.9);
+      transition: transform 0.4s ease;
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-subtitle-en {
+      font-family: var(--font-heading);
+      font-size: 0.85rem;
+      color: var(--gold-primary);
+      letter-spacing: 3px;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      color: var(--text-cream);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .modal-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-cream);
+      border: 1px solid var(--border-gold);
+      padding: 0.8rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+    }
+
+    .anim-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: #0A0A0A;
+      z-index: 200;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .anim-spinner {
+      width: 80px;
+      height: 80px;
+      border: 2px solid transparent;
+      border-top-color: var(--gold-primary);
+      border-bottom-color: var(--gold-primary);
+      border-radius: 50%;
+      animation: spin 1.2s linear infinite;
+      margin-bottom: 2rem;
+      box-shadow: var(--glow-gold);
+    }
+
+    .anim-text {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      color: var(--gold-light);
+      letter-spacing: 4px;
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    .result-container {
+      display: none;
+      text-align: center;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .result-badge {
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      color: var(--gold-primary);
+      letter-spacing: 3px;
+      margin-bottom: 1rem;
+    }
+
+    .role-title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--gold-light);
+      text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+      margin: 1.5rem 0;
+      letter-spacing: 4px;
+      border-top: 1px dashed var(--border-gold);
+      border-bottom: 1px dashed var(--border-gold);
+      padding: 1.5rem 0;
+    }
+
+    .welcome-member-text {
+      font-size: 1.1rem;
+      color: var(--text-cream);
+      margin-bottom: 2rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      from { opacity: 0.5; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 1.7rem; }
+      .card { padding: 1.8rem 1.2rem; }
+      .role-title { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Hero Header Section -->
+    <header class="hero-header">
+      <svg class="crest-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 5L15 25V45C15 68 30 88 50 95C70 88 85 68 85 45V25L50 5Z" stroke="#D4AF37" stroke-width="2" fill="#111"/>
+        <path d="M50 15L25 30V45C25 62 35 77 50 83C65 77 75 62 75 45V30L50 15Z" stroke="#D4AF37" stroke-width="1"/>
+        <circle cx="50" cy="45" r="10" fill="#D4AF37"/>
+      </svg>
+      <h1 class="hero-title">BENVENUTO NELLA FAMIGLIA</h1>
+      <p class="hero-subtitle">กรอกข้อมูลของคุณ เพื่อเข้าสู่การสุ่มบทบาทในครอบครัว</p>
+      
+      <div class="ornament-divider">
+        <div class="ornament-diamond"></div>
+      </div>
+    </header>
+
+    <!-- Main Form -->
+    <main id="mainFormContainer">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">MEMBER REGISTRATION</h2>
+          <p class="card-desc">กรุณากรอกข้อมูลของคุณเพื่อเข้าร่วมครอบครัว</p>
+        </div>
+
+        <form id="mafiaForm" onsubmit="handleFormSubmit(event)">
+          <div class="form-group">
+            <label class="form-label" for="chineseName">ชื่อภาษาจีน <span class="required">*</span></label>
+            <input type="text" id="chineseName" class="input-control" placeholder="กรอกชื่อภาษาจีนของคุณ" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="thaiName">ชื่อภาษาไทย <span class="required">*</span></label>
+            <input type="text" id="thaiName" class="input-control" placeholder="กรอกชื่อภาษาไทยของคุณ" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="roleField">บทบาทสมาชิก</label>
+            <input type="text" id="roleField" class="input-control" value="รอการสุ่มบทบาท..." disabled />
+          </div>
+
+          <h3 class="section-title">CONTACT CHANNELS</h3>
+          <p class="section-desc">กรุณากรอกช่องทางการติดต่ออย่างน้อย 2 จาก 3 ช่อง</p>
+
+          <div class="form-group">
+            <label class="form-label" for="lineContact">Link LINE</label>
+            <input type="text" id="lineContact" class="input-control" placeholder="https://line.me/..." />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="igContact">Link Instagram</label>
+            <input type="text" id="igContact" class="input-control" placeholder="https://instagram.com/..." />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="tiktokContact">Link TikTok</label>
+            <input type="text" id="tiktokContact" class="input-control" placeholder="https://tiktok.com/@..." />
+          </div>
+
+          <div id="errorMessage" class="error-message"></div>
+
+          <button type="submit" id="btnSubmit" class="btn-submit">
+            SUBMIT & ENTER THE FAMILY
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <!-- Result View -->
+    <div id="resultContainer" class="card result-container">
+      <div class="result-badge">YOUR DESTINY HAS BEEN REVEALED</div>
+      <p class="card-desc">บทบาทของคุณถูกเปิดเผยแล้ว</p>
+
+      <div class="role-title" id="revealedRole">THE DON</div>
+
+      <div class="welcome-member-text">
+        ยินดีต้อนรับเข้าสู่ครอบครัว, <br>
+        <span id="memberNameThai" style="color: var(--gold-light); font-weight: 600;"></span>
+      </div>
+
+      <button onclick="resetToHome()" class="btn-secondary" style="width: 100%;">
+        กลับหน้าหลัก
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Modal Popup -->
+  <div id="confirmModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-subtitle-en">ARE YOU READY?</div>
+      <h3 class="modal-title">คุณพร้อมจะสุ่มบทบาทหรือยัง?</h3>
+      <p class="modal-text">
+        ข้อมูลของคุณถูกบันทึกเรียบร้อยแล้ว<br>
+        ถึงเวลาค้นหาบทบาทของคุณในครอบครัว
+      </p>
+
+      <div class="modal-actions">
+        <button id="btnDrawRole" onclick="startRandomRoleProcess()" class="btn-submit">
+          พร้อมแล้ว — สุ่มบทบาท
+        </button>
+        <button onclick="closeModal()" class="btn-secondary">
+          กลับไปตรวจสอบข้อมูล
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Screen Overlay -->
+  <div id="animOverlay" class="anim-overlay">
+    <div class="anim-spinner"></div>
+    <div class="anim-text">DETERMINING YOUR DESTINY...</div>
+  </div>
+
+  <script>
+    // **วาง URL ที่ได้จากการ Deploy Google Apps Script ที่นี่**
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwwHotVTTU1UGlPGsihhhE-f-ZZMp3rfSqig2Vhe1AMeOa4bvqLOeKGTYJBVrndrE0/exec";
+
+    let currentRecordId = null;
+    let savedThaiName = "";
+
+    async function handleFormSubmit(event) {
+      event.preventDefault();
+      clearError();
+
+      const chineseName = document.getElementById('chineseName').value.trim();
+      const thaiName = document.getElementById('thaiName').value.trim();
+      const line = document.getElementById('lineContact').value.trim();
+      const instagram = document.getElementById('igContact').value.trim();
+      const tiktok = document.getElementById('tiktokContact').value.trim();
+
+      // Check contact count (at least 2)
+      const contacts = [line, instagram, tiktok].filter(val => val.length > 0);
+      if (contacts.length < 2) {
+        showError("กรุณากรอกช่องทางการติดต่ออย่างน้อย 2 ช่อง");
+        return;
+      }
+
+      // Robust URL Validation (Fix for query strings & special parameters)
+      for (let url of contacts) {
+        try {
+          let formattedUrl = url.startsWith('http://') || url.startsWith('https://') 
+            ? url 
+            : 'https://' + url;
+
+          const parsedUrl = new URL(formattedUrl);
+          
+          if (parsedUrl.protocol !== "http:" && parsedUrl.protocol !== "https:") {
+            showError("กรุณาตรวจสอบ Link ช่องทางการติดต่อของคุณอีกครั้ง");
+            return;
+          }
+        } catch (e) {
+          showError("กรุณาตรวจสอบ Link ช่องทางการติดต่อของคุณอีกครั้ง");
+          return;
+        }
+      }
+
+      savedThaiName = thaiName;
+
+      const btnSubmit = document.getElementById('btnSubmit');
+      btnSubmit.disabled = true;
+      btnSubmit.innerText = "SAVING DATA...";
+
+      try {
+        const payload = {
+          action: "register",
+          chineseName: chineseName,
+          thaiName: thaiName,
+          line: line,
+          instagram: instagram,
+          tiktok: tiktok
+        };
+
+        const response = await fetch(SCRIPT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          currentRecordId = result.recordId;
+          openModal();
+        } else {
+          showError("เกิดข้อผิดพลาดในการบันทึกข้อมูล กรุณาลองใหม่อีกครั้ง");
+        }
+      } catch (err) {
+        console.error(err);
+        showError("ไม่สามารถเชื่อมต่อระบบได้ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต");
+      } finally {
+        btnSubmit.disabled = false;
+        btnSubmit.innerText = "SUBMIT & ENTER THE FAMILY";
+      }
+    }
+
+    function showError(msg) {
+      const errBox = document.getElementById('errorMessage');
+      errBox.innerText = msg;
+      errBox.style.display = 'block';
+    }
+
+    function clearError() {
+      const errBox = document.getElementById('errorMessage');
+      errBox.innerText = '';
+      errBox.style.display = 'none';
+    }
+
+    function openModal() {
+      document.getElementById('confirmModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('confirmModal').classList.remove('active');
+    }
+
+    async function startRandomRoleProcess() {
+      closeModal();
+      
+      const animOverlay = document.getElementById('animOverlay');
+      animOverlay.style.display = 'flex';
+
+      try {
+        const payload = {
+          action: "draw_role",
+          recordId: currentRecordId
+        };
+
+        const response = await fetch(SCRIPT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        setTimeout(() => {
+          animOverlay.style.display = 'none';
+          if (result.success) {
+            showResult(result.role);
+          } else {
+            alert("เกิดข้อผิดพลาดในการสุ่มบทบาท");
+          }
+        }, 2500);
+
+      } catch (err) {
+        console.error(err);
+        animOverlay.style.display = 'none';
+        alert("การเชื่อมต่อขัดข้อง ไม่สามารถสุ่มบทบาทได้");
+      }
+    }
+
+    function showResult(role) {
+      document.getElementById('mainFormContainer').style.display = 'none';
+      document.getElementById('revealedRole').innerText = role;
+      document.getElementById('memberNameThai').innerText = savedThaiName;
+      document.getElementById('resultContainer').style.display = 'block';
+    }
+
+    function resetToHome() {
+      document.getElementById('mafiaForm').reset();
+      document.getElementById('resultContainer').style.display = 'none';
+      document.getElementById('mainFormContainer').style.display = 'block';
+      clearError();
+    }
+  </script>
+</body>
+</html>
